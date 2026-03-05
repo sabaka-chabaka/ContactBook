@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 void Book::add_contact(Contact &contact) {
     contacts.push_back(contact);
@@ -20,6 +21,37 @@ void Book::save_to_csv(const std::string &filename) {
         file << contact.name << "," << contact.email << "\n";
     }
     file.close();
+}
+
+std::vector<std::string> Book::split(const std::string &line, char delimiter) {
+    std::vector<std::string> parts;
+    std::stringstream ss(line);
+    std::string item;
+
+    while (std::getline(ss, item, delimiter)) {
+        parts.push_back(item);
+    }
+    return parts;
+}
+
+void Book::load_from_csv(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) return;
+
+    std::string line;
+
+    while (std::getline(file, line)) {
+        if (line.empty()) continue;
+
+        auto parts = split(line, ',');
+        if (parts.size() < 2) continue;
+
+        Contact c;
+        c.name  = parts[0];
+        c.email = parts[1];
+
+        contacts.push_back(c);
+    }
 }
 
 Contact Book::get_contact(std::string name) {
