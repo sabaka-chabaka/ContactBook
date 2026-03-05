@@ -3,4 +3,4 @@ project(ContactBook)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(ContactBook main.cpp)
+add_executable(ContactBook main.cpp book.h book.cpp)
