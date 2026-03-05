@@ -11,6 +11,7 @@ int main() {
 
     book.add_contact(c);
     book.list_contacts();
+    book.save_to_csv("D:/eblan/eb.csv");
 
     return 0;
 }
