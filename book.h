@@ -20,7 +20,7 @@ public:
 
     void save_to_csv(const std::string &filename);
 
-    std::vector<std::string> split(const std::string &line, char delimiter = ',');
+    static std::vector<std::string> split(const std::string &line, char delimiter = ',');
 
     void load_from_csv(const std::string& filename);
 
